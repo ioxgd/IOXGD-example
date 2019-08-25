@@ -1,7 +1,7 @@
 #include <IOXGD.h>
 #include <lvgl.h>
 
-#define BUZZER_PIN 8
+#define BUZZER_PIN 37
 
 static void event_handler(lv_obj_t * obj, lv_event_t event) {
   if (event == LV_EVENT_VALUE_CHANGED) {
