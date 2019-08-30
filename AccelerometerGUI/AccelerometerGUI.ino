@@ -40,7 +40,6 @@ void setup() {
   lv_label_set_align(label2, LV_LABEL_ALIGN_CENTER);
   lv_obj_set_width(label1, 60);
 
-  /*Create new style (thick dark blue)*/
   lv_style_copy(&style_line, &lv_style_plain);
   style_line.line.color = LV_COLOR_MAKE(0x00, 0x00, 0x00);
   style_line.line.width = 8;
