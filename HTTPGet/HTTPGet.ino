@@ -6,7 +6,7 @@ void setup() {
   Serial.begin(115200);
   
   WiFi.begin();
-  WiFi.connect("e-tech good net", "987654321");
+  WiFi.connect("MaxHome3BB", "987654321");
   
   Serial.print("Connect");
   while(!WiFi.isConnected()) {
