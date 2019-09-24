@@ -4,7 +4,7 @@
 
 lv_obj_t* screenSelectTime;
 lv_obj_t* screenQRCode;
-lv_obj_t* screenCountdown;
+lv_obj_t* screenCharge;
 
 extern lv_font_t supermarket_60;
 extern lv_font_t supermarket_160;
@@ -22,16 +22,35 @@ uint8_t qrCodePage_countdown_flag = 0;
 bool trigBeep = false;
 bool beeping = false;
 
+#define MAX_TIME_SHOW_QRCODE 90
+uint8_t timeout_counter = MAX_TIME_SHOW_QRCODE;
+lv_task_t* countdownTask;
+
+void countdownReset() {
+  lv_scr_load(screenSelectTime);
+  timeout_counter = MAX_TIME_SHOW_QRCODE;
+  lv_task_del(countdownTask);
+}
+
+void countdownTask_cb(lv_task_t* task) {
+  timeout_counter--;
+  lv_label_set_text(timeoutLabel, String(String("เหลือเวลาอีก ") + timeout_counter + String(" วินาที")).c_str());
+  if (timeout_counter == 0) {
+    countdownReset();
+  }
+}
+
 void select_plan_cb(uint8_t plan) {
   Serial.println("Click " + String(plan));
   // lv_obj_set_hidden(loader1, false);
 
+  beep();
+  
   // Show QR Code page
   lv_scr_load(screenQRCode);
 
-  qrCodePage_countdown_flag = 1;
-
-  trigBeep = true;
+  lv_label_set_text(timeoutLabel, String(String("เหลือเวลาอีก ") + timeout_counter + String(" วินาที")).c_str());
+  countdownTask = lv_task_create(countdownTask_cb, 1000, LV_TASK_PRIO_MID, NULL);
 }
 
 static void select_plan1_cb(lv_obj_t * obj, lv_event_t event) {
@@ -49,6 +68,13 @@ static void select_plan2_cb(lv_obj_t * obj, lv_event_t event) {
 static void select_plan3_cb(lv_obj_t * obj, lv_event_t event) {
   if (event == LV_EVENT_CLICKED) {
     select_plan_cb(3);
+  }
+}
+
+static void cancel_qrcode_cb(lv_obj_t * obj, lv_event_t event) {
+  if (event == LV_EVENT_CLICKED) {
+    beep();
+    countdownReset();
   }
 }
 
@@ -304,7 +330,7 @@ void setup() {
   lv_style_copy(&buttonLabelStyle, &lv_style_plain);
   buttonLabelStyle.text.font = &supermarket_40;
   buttonLabelStyle.text.color = lv_color_hex(0xffffff);
-  
+
   lv_obj_t * confirmButton = lv_btn_create(screenQRCode, NULL);
   // lv_obj_set_event_cb(confirmButton, event_handler);
   lv_btn_set_style(confirmButton, LV_BTN_STATE_REL, &confirmButtonRelStyle);
@@ -331,7 +357,7 @@ void setup() {
   cancelButtonPrStyle.body.main_color = lv_color_hex(0xCB4335);
   cancelButtonPrStyle.body.grad_color = lv_color_hex(0xCB4335);
   cancelButtonPrStyle.body.border.color = lv_color_hex(0xCB4335);
-  
+
   lv_obj_t * cancelButton = lv_btn_create(screenQRCode, NULL);
   // lv_obj_set_event_cb(confirmButton, event_handler);
   lv_btn_set_style(cancelButton, LV_BTN_STATE_REL, &cancelButtonRelStyle);
@@ -339,59 +365,36 @@ void setup() {
   lv_obj_align(cancelButton, NULL, LV_ALIGN_IN_BOTTOM_RIGHT, -300, -50);
   lv_obj_set_width(cancelButton, 350);
 
+  lv_obj_set_event_cb(cancelButton, cancel_qrcode_cb);
+
   lv_obj_t * cancelButtonLabel = lv_label_create(cancelButton, NULL);
   lv_label_set_style(cancelButtonLabel, LV_LABEL_STYLE_MAIN, &buttonLabelStyle);
   lv_label_set_text(cancelButtonLabel, "ยกเลิก");
 
-  screenCountdown = lv_obj_create(NULL, NULL);
+  screenCharge = lv_obj_create(NULL, NULL);
+  
+  static lv_style_t screenChargeStyle;
+  lv_style_copy(&screenChargeStyle, &lv_style_plain);
+  screenChargeStyle.body.main_color = lv_color_hex(0x1C2833);
+  screenChargeStyle.body.grad_color = lv_color_hex(0x1C2833);
+  lv_obj_set_style(screenCharge, &screenChargeStyle);
 
   // Load screen
   // lv_scr_load(screenSelectTime);
-  lv_scr_load(screenQRCode);
+  // lv_scr_load(screenQRCode);
+  lv_scr_load(screenCharge);
 
   // Use core 1 to run littlevgl loop
   register_core1(loop1, NULL);
 }
 
 void loop() {
-  static uint32_t timer = millis();
-  if (trigBeep) {
-    if (!beeping) {
-      tone(BUZZER_PIN, 4E3);
-      beeping = true;
-      timer = millis();
-    } else {
-      if ((millis() - timer) > 50) {
-        noTone(BUZZER_PIN);
-        beeping = false;
-        trigBeep = false;
-      }
-    }
-  }
-
-  if (qrCodePage_countdown_flag == 1) {
-    static uint64_t strat = millis();
-    static uint8_t i = 90;
-    if ((millis() - strat) > 1000){
-      strat = millis();
-      
-      lv_label_set_text(timeoutLabel, String(String("เหลือเวลาอีก ") + i + String(" วินาที")).c_str());
-      if (i == 0) {
-        lv_scr_load(screenSelectTime);
-        i = 90;
-        qrCodePage_countdown_flag = 0;
-      } else {
-        i--;
-      }
-      // delay(1000);
-    }
-  }
+  delay(100);
 }
 
 int loop1(void *ctx) {
   Serial.println("Core " + String(current_coreid()) + " runing");
   while (1) {
     lv_task_handler(); /* let the GUI do its work */
-    delay(5);
   }
 }
