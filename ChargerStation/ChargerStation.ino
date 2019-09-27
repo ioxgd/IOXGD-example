@@ -2,6 +2,9 @@
 #include <sysctl.h>
 #include <IOXGD.h>
 
+#include <FreeRTOS.h>
+#include <task.h>
+
 lv_obj_t* screenSelectTime;
 lv_obj_t* screenQRCode;
 lv_obj_t* screenCharge;
@@ -380,21 +383,23 @@ void setup() {
   lv_obj_set_style(screenCharge, &screenChargeStyle);
 
   // Load screen
-  // lv_scr_load(screenSelectTime);
+  lv_scr_load(screenSelectTime);
   // lv_scr_load(screenQRCode);
-  lv_scr_load(screenCharge);
+  // lv_scr_load(screenCharge);
 
   // Use core 1 to run littlevgl loop
-  register_core1(loop1, NULL);
+  // register_core1(loop1, NULL);
+
+  xTaskCreate([](void*) {
+    while (1) {
+      lv_task_handler(); /* let the GUI do its work */
+      vTaskDelay(5 / portTICK_PERIOD_MS);
+    }
+  }, "lvLoopTask", 32768, NULL, 1, NULL);
+
+  vTaskStartScheduler();
 }
 
 void loop() {
-  delay(100);
-}
-
-int loop1(void *ctx) {
-  Serial.println("Core " + String(current_coreid()) + " runing");
-  while (1) {
-    lv_task_handler(); /* let the GUI do its work */
-  }
+  vTaskDelay(500 / portTICK_PERIOD_MS);
 }
