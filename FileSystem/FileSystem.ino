@@ -38,7 +38,7 @@ static lv_fs_res_t lv_sd_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos) {
 void setup() {
   Serial.begin(115200);
 
-  gd.begin();
+  gd.begin(); // Keep it first
 
   Serial.print("\nInitializing SD card...");
   if (!SD.begin(29)) {
