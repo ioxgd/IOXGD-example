@@ -29,6 +29,11 @@ bool beeping = false;
 uint8_t timeout_counter = MAX_TIME_SHOW_QRCODE;
 lv_task_t* countdownTask;
 
+char ptrTaskList[1024];
+static void showAllTask() {
+  Serial.println(uxTaskGetNumberOfTasks());
+}
+
 void countdownReset() {
   lv_scr_load(screenSelectTime);
   timeout_counter = MAX_TIME_SHOW_QRCODE;
@@ -46,9 +51,10 @@ void countdownTask_cb(lv_task_t* task) {
 void select_plan_cb(uint8_t plan) {
   Serial.println("Click " + String(plan));
   // lv_obj_set_hidden(loader1, false);
+  showAllTask();
 
-  beep();
-  
+  gd.beep();
+
   // Show QR Code page
   lv_scr_load(screenQRCode);
 
@@ -76,14 +82,13 @@ static void select_plan3_cb(lv_obj_t * obj, lv_event_t event) {
 
 static void cancel_qrcode_cb(lv_obj_t * obj, lv_event_t event) {
   if (event == LV_EVENT_CLICKED) {
-    beep();
+    showAllTask();
+    gd.beep();
     countdownReset();
   }
 }
 
 void setup() {
-  pinMode(BUZZER_PIN, OUTPUT);
-
   Serial.begin(115200);
   Serial.println("Core " + String(current_coreid()) + " runing");
 
@@ -220,10 +225,10 @@ void setup() {
   // Loader
   static lv_style_t style;
   lv_style_copy(&style, &lv_style_plain);
-  style.line.width = 10;                         /*10 px thick arc*/
-  style.line.color = lv_color_hex3(0x258);       /*Blueish arc color*/
+  style.line.width = 10;
+  style.line.color = lv_color_hex3(0x258);
 
-  style.body.border.color = lv_color_hex3(0xBBB); /*Gray background color*/
+  style.body.border.color = lv_color_hex3(0xBBB);
   style.body.border.width = 10;
   style.body.padding.left = 0;
 
@@ -375,7 +380,7 @@ void setup() {
   lv_label_set_text(cancelButtonLabel, "ยกเลิก");
 
   screenCharge = lv_obj_create(NULL, NULL);
-  
+
   static lv_style_t screenChargeStyle;
   lv_style_copy(&screenChargeStyle, &lv_style_plain);
   screenChargeStyle.body.main_color = lv_color_hex(0x1C2833);
@@ -389,17 +394,20 @@ void setup() {
 
   // Use core 1 to run littlevgl loop
   // register_core1(loop1, NULL);
+  
+//  xTaskCreate([](void*) {
+//    while (1) {
+//      lv_task_handler();
+//      vTaskDelay(5 / portTICK_PERIOD_MS);
+//    }
+//  }, "lvLoopTask", 32768, NULL, 1, NULL);
+//
+//  vTaskStartScheduler();
 
-  xTaskCreate([](void*) {
-    while (1) {
-      lv_task_handler(); /* let the GUI do its work */
-      vTaskDelay(5 / portTICK_PERIOD_MS);
-    }
-  }, "lvLoopTask", 32768, NULL, 1, NULL);
-
-  vTaskStartScheduler();
+  gd.startFreeRTOS();
 }
 
 void loop() {
-  vTaskDelay(500 / portTICK_PERIOD_MS);
+  //  lv_task_handler();
+  //  delay(5);
 }

@@ -1,11 +1,10 @@
-#include <ESP32WiFi.h>
-#include <ESP32HTTP.h>
+#include <IOXGD.h>
 
 void setup() {
   delay(2000);
   Serial.begin(115200);
   
-  WiFi.begin();
+  ESP32.begin();
   WiFi.connect("MaxHome3BB", "987654321");
   
   Serial.print("Connect");
