@@ -1,0 +1,460 @@
+{
+	"font": [
+		{
+			"name": "Roboto_16",
+			"size": 16,
+			"range": "0x0020-0x007F",
+			"variable": "lv_font_roboto_16",
+			"file": "font/Roboto-Regular.ttf"
+		},
+		{
+			"name": "supermarket_30",
+			"file": "C:\\Users\\Max\\Downloads\\supermarket (3)\\supermarket-1-1\\supermarket.ttf",
+			"size": 30,
+			"range": "0x0020-0x007F,0x0E00-0x0E7F"
+		},
+		{
+			"name": "supermarket_60",
+			"file": "C:\\Users\\Max\\Downloads\\supermarket (3)\\supermarket-1-1\\supermarket.ttf",
+			"size": 60,
+			"range": "0x0020-0x007F,0x0E00-0x0E7F"
+		}
+	],
+	"page": [
+		{
+			"name": "index",
+			"background": {
+				"main_color": "#3D3D3D",
+				"grad_color": "#242424"
+			},
+			"component": {
+				"component-0": {
+					"name": "Button",
+					"property": {
+						"name": "btn1",
+						"hidden": 1,
+						"alignX": 0,
+						"alignY": 0,
+						"x": 0,
+						"y": 0,
+						"width": 120,
+						"height": 80,
+						"toggle": 0,
+						"text": "< Back",
+						"rel_main_color": "#535353",
+						"rel_grad_color": "#535353",
+						"pr_main_color": "#0A131D",
+						"pr_grad_color": "#0A131D",
+						"border_width": 0,
+						"border_color": "#0B1928",
+						"radius": 0,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-1": {
+					"name": "Button",
+					"property": {
+						"name": "digi0",
+						"hidden": 1,
+						"alignX": 0,
+						"alignY": 2,
+						"x": 0,
+						"y": 0,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "0",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-2": {
+					"name": "Button",
+					"property": {
+						"name": "dot",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 2,
+						"x": -100,
+						"y": 0,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": ".",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-3": {
+					"name": "Button",
+					"property": {
+						"name": "equal",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 2,
+						"x": 100,
+						"y": 0,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "=",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-4": {
+					"name": "Button",
+					"property": {
+						"name": "plus",
+						"hidden": 1,
+						"alignX": 2,
+						"alignY": 2,
+						"x": 0,
+						"y": 0,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "+",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-5": {
+					"name": "Button",
+					"property": {
+						"name": "digi1",
+						"hidden": 1,
+						"alignX": 0,
+						"alignY": 1,
+						"x": 0,
+						"y": 120,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "1",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-6": {
+					"name": "Button",
+					"property": {
+						"name": "digi2",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 1,
+						"x": -100,
+						"y": 120,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "2",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-7": {
+					"name": "Button",
+					"property": {
+						"name": "digi3",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 1,
+						"x": 100,
+						"y": 120,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "3",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-8": {
+					"name": "Button",
+					"property": {
+						"name": "minus",
+						"hidden": 1,
+						"alignX": 2,
+						"alignY": 1,
+						"x": 0,
+						"y": 120,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "-",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-9": {
+					"name": "Button",
+					"property": {
+						"name": "digi4",
+						"hidden": 1,
+						"alignX": 0,
+						"alignY": 1,
+						"x": 0,
+						"y": 40,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "4",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-10": {
+					"name": "Button",
+					"property": {
+						"name": "digi5",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 1,
+						"x": -100,
+						"y": 40,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "5",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-11": {
+					"name": "Button",
+					"property": {
+						"name": "digi6",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 1,
+						"x": 100,
+						"y": 40,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "6",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-12": {
+					"name": "Button",
+					"property": {
+						"name": "multiplication",
+						"hidden": 1,
+						"alignX": 2,
+						"alignY": 1,
+						"x": 0,
+						"y": 40,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "*",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_60"
+					}
+				},
+				"component-13": {
+					"name": "Button",
+					"property": {
+						"name": "digi7",
+						"hidden": 1,
+						"alignX": 0,
+						"alignY": 0,
+						"x": 0,
+						"y": 160,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "7",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-14": {
+					"name": "Button",
+					"property": {
+						"name": "digi8",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 0,
+						"x": -100,
+						"y": 160,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "8",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-15": {
+					"name": "Button",
+					"property": {
+						"name": "digi9",
+						"hidden": 1,
+						"alignX": 1,
+						"alignY": 0,
+						"x": 100,
+						"y": 160,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "9",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-16": {
+					"name": "Button",
+					"property": {
+						"name": "divide",
+						"hidden": 1,
+						"alignX": 2,
+						"alignY": 0,
+						"x": 0,
+						"y": 160,
+						"width": 200,
+						"height": 80,
+						"toggle": 0,
+						"text": "/",
+						"rel_main_color": "#76A2D0",
+						"rel_grad_color": "#193A5D",
+						"pr_main_color": "#336294",
+						"pr_grad_color": "#10263C",
+						"border_width": 2,
+						"border_color": "#0B1928",
+						"radius": 6,
+						"color": "#FFFFFF",
+						"font": "supermarket_30"
+					}
+				},
+				"component-17": {
+					"name": "Label",
+					"property": {
+						"name": "result",
+						"hidden": 1,
+						"alignX": 2,
+						"alignY": 0,
+						"x": -40,
+						"y": 30,
+						"width": 0,
+						"height": 0,
+						"text": "0",
+						"text_align": 0,
+						"color": "#FFFFFF",
+						"mode": 0,
+						"font": "supermarket_60"
+					}
+				}
+			}
+		}
+	]
+}
