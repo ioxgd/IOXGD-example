@@ -59,30 +59,35 @@ void setup() {
   lv_obj_set_event_cb(rate1, [](lv_obj_t * obj, lv_event_t event) {
     if(event == LV_EVENT_CLICKED) {
       send_rate = 1;
+      gd.beep();
     }
   });
 
   lv_obj_set_event_cb(rate2, [](lv_obj_t * obj, lv_event_t event) {
     if(event == LV_EVENT_CLICKED) {
       send_rate = 2;
+      gd.beep();
     }
   });
 
   lv_obj_set_event_cb(rate3, [](lv_obj_t * obj, lv_event_t event) {
     if(event == LV_EVENT_CLICKED) {
       send_rate = 3;
+      gd.beep();
     }
   });
 
   lv_obj_set_event_cb(rate4, [](lv_obj_t * obj, lv_event_t event) {
     if(event == LV_EVENT_CLICKED) {
       send_rate = 4;
+      gd.beep();
     }
   });
 
   lv_obj_set_event_cb(rate5, [](lv_obj_t * obj, lv_event_t event) {
     if(event == LV_EVENT_CLICKED) {
       send_rate = 5;
+      gd.beep();
     }
   });
 
