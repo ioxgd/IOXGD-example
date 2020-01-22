@@ -7,14 +7,15 @@ extern lv_obj_t* txt4;
 char thMonth[12][40] = { "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม" };
 
 void setup() {
+  Serial.begin(115200);
+  
   gd.begin(SETUP_LVGL);
 
   load_page();
 
   xTaskCreate([](void*) {
-    Serial.begin(115200);
-
-    WiFi.begin();
+    
+    ESP32.begin();
     WiFi.connect("MaxHome3BB", "987654321");
 
     Serial.print("Connect");
@@ -39,32 +40,20 @@ void setup() {
 
     while (1) {
       if (RTC.get()) {
-        String timeStr;
-        if (RTC.hour() < 10) timeStr += '0';
-        timeStr += RTC.hour();
-        timeStr += ':';
-        if (RTC.minute() < 10) timeStr += '0';
-        timeStr += RTC.minute();
-        timeStr += ':';
-        if (RTC.second() < 10) timeStr += '0';
-        timeStr += RTC.second();
+        char timeStr[20];
+        sprintf(timeStr, "%02d:%02d:%02d", RTC.hour(), RTC.minute(), RTC.second());
+        lv_label_set_text(txt2, timeStr);
 
-        lv_label_set_text(txt2, timeStr.c_str());
-
-        String dateStr;
-        dateStr += RTC.day();
-        dateStr += ' ';
-        dateStr += thMonth[RTC.month() - 1];
-        dateStr += ' ';
-        dateStr += (RTC.year() + 543);
-        lv_label_set_text(txt3, dateStr.c_str());
+        char dateStr[100];
+        sprintf(dateStr, "%d %s %d", RTC.day(), thMonth[RTC.month() - 1], RTC.year() + 543);
+        lv_label_set_text(txt3, dateStr);
       } else {
         Serial.println("Error, can't read from RTC.");
         lv_label_set_text(txt2, "ERROR");
       }
       delay(1000);
     }
-  }, "mainTask", 1024, NULL, 1, NULL);
+  }, "mainTask", 2048, NULL, 1, NULL);
 
   gd.startFreeRTOS();
 }
